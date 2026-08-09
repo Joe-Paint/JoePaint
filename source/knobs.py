@@ -15,14 +15,14 @@ def saveKnobs( knobs : Knobs ):
         "minArea": knobs.minArea
     }
 
-    with open("joePaintKnobs.json", "w") as file:
+    with open("knobs.json", "w") as file:
         json.dump( data, file, indent = 4 )
 
 # ===========================================================
 def loadKnobs() -> Knobs:
     knobs = Knobs()
 
-    filename = "joePaintKnobs.json"
+    filename = "knobs.json"
     path = Path( filename )
     if not path.is_file():
         return knobs

@@ -306,7 +306,7 @@ def saveMask( mask, filename ):
 
 # ===========================================================
 windowName="Joe Paint"
-directory   = "snapshots/Decode/StateBrighter"
+directory   = "snapshots"
 fileNames   =   glob.glob( directory + '/*.png')
 
 if len( fileNames ) <= 0:
@@ -336,7 +336,7 @@ greenStatistics  = ColorChannelsStatistics()
 purpleStatistics = ColorChannelsStatistics()
 yellowStatistics = ColorChannelsStatistics()
 
-logoFilename = "Joe Paint/logo.png"
+logoFilename = "logo.png"
 logoImage    = cv2.imread( logoFilename )
 
 for fileName in fileNames:

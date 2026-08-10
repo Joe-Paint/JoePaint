@@ -1,25 +1,28 @@
+# What is Joe Paint?
+
 Joe Paint is a general purpose calibration tool created by Joe Bots White #13702 for FTC and FRC FIRST robotics teams that allows them to quickly and easily calibrate a Limelight camera to identify game pieces by color. Calibration is hard so we created this tool to automate the process. It computes thresholds for hue, saturation, and value using histograms and statistics such as the mean and standard deviation, and provides an interactive way to adjust parameters for removing noise, filling holes, and filtering out small contours.
 
-To use Joe Paint you will first need to take snapshots with your Limelight camera. 
-Connect your Limelight to your computer using a USB cable, then navigate to http://limelight.local:5801
-Select the "Input" tab and change the source type to "Camera"
-Click the "Take Snapshot" button to save up to 32 snapshots on the camera.
+To use Joe Paint you will first need to take snapshots with your [Limelight](https://limelightvision.io/) camera. 
+* Connect your Limelight to your computer using a USB cable
+* Navigate to [http://limelight.local:5801](http://limelight.local:5801)
+* Select the **Input** tab and change the source type to **Camera**
+* Click the **Take Snapshot** button to save up to 32 snapshots on the camera
+* Download snapshots to Joe Paint's **snapshots** folder by changing the source type to **Snapshot** and clicking the capture download buttons.
 
-Next download snapshots to Joe Paint's "snapshots" folder by changing the source type to "Snapshot" and clicking the capture download buttons.
+# Running Joe Paint
 
-To start Joe Paint:
--run JoePaint.cmd from the command line
--or double click JoePaint.command (macOS)
--or configure your Python IDE (e.g. PyCharm) to run source/main.py with the working directory set to the "JoePaint" folder.
+* run _JoePaint.cmd_ from the command line or
+* double click _JoePaint.command_ (macOS) or
+* configure your Python IDE (e.g. [PyCharm](https://www.jetbrains.com/pycharm/)) to run _source/main.py_ with the working directory set to the **JoePaint** folder.
 
 At the top left of the Joe Paint interface you'll see the current captured image. 
 
 By clicking to paint on portions of each captured image you can teach the computer what particular colors look like. First select a color using the 1-5 keys.
-Move the cursor over "Capture with painted regions" at the top left and click and drag to paint on objects of the current color.
+Move the cursor over **Capture with painted regions** at the top left and click and drag to paint on objects of the current color.
 
 Use the + and - keys to adjust the brush size and the space bar to change the brush shape.
 
-In the "Sampled Pixels" visualization you can see highlighted pixels that the program will sample to compute the threshold ranges. Use the 6 key to switch to the eraser tool or click within the "Sampled Pixels" visualization to erase regions that were marked by accident.
+In the **Sampled Pixels** visualization you can see highlighted pixels that the program will sample to compute the threshold ranges. Use the 6 key to switch to the eraser tool or click within the **Sampled Pixels** visualization to erase regions that were marked by accident.
 
 Use the [ and ] or the left and right arrow keys to switch between different snapshots. The computer gets better at identifying colors the more you paint and use by using additional captured images.
 
@@ -31,4 +34,4 @@ With the cleaned up mask Joe Paint can locate objects by computing contours. Sma
 
 Tap R at any time to clear all painted pixels and reset the number of steps for removing noise, filling holes, and the minimum contour area.
 
-Tap Q or Escape to quit and write out the calibration settings to a knobs.json file.
+Tap Q or Escape to quit and write out the calibration settings to a _knobs.json_ file.

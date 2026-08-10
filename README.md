@@ -15,6 +15,8 @@ To use Joe Paint you will first need to take snapshots with your [Limelight](htt
 * double click _JoePaint.command_ (macOS) or
 * configure your Python IDE (e.g. [PyCharm](https://www.jetbrains.com/pycharm/)) to run _source/main.py_ with the working directory set to the **JoePaint** folder.
 
+<img align="right" src="docs/painting.png" width="300" alt="Captured Image">
+
 At the top left of the Joe Paint interface you'll see the current captured image. 
 
 By clicking to paint on portions of each captured image you can teach the computer what particular colors look like. First select a color using the 1-5 keys.
@@ -24,11 +26,17 @@ Use the + and - keys to adjust the brush size and the space bar to change the br
 
 In the **Sampled Pixels** visualization you can see highlighted pixels that the program will sample to compute the threshold ranges. Use the 6 key to switch to the eraser tool or click within the **Sampled Pixels** visualization to erase regions that were marked by accident.
 
+<img align="left" src="docs/histogram.png" height="200" alt="HSL Histogram">
+
 Use the [ and ] or the left and right arrow keys to switch between different snapshots. The computer gets better at identifying colors the more you paint and use by using additional captured images.
 
 Joe Paint calculates histograms, shown at the top right, that represent the number of times each hue, saturation, and value is observed in the sampled pixels across all captured images. It computes the mean (or average), which is shown with a red line, to find the center of each peak. It uses the circular mean for hue since some colors, like red, wrap around the numerical origin. The thresholds for hue, saturation, and value are computed by adding and subtracting 2 standard deviations from the mean. These define the ranges shown in yellow.
 
+<img align="right" src="docs/mask.png" height="200" alt="Color Mask">
+
 Using these thresholds, Joe Paint computes the color mask that should be used to identify pixels for a particular color. Unfortunately the computed mask can contain noise, which can be removed by eroding and then dilating. Adjust the number of steps by tapping the N and M keys. Holes in the mask can be filled by dilating and then eroding. Adjust the number of steps by tapping the F and G keys.
+
+<img align="left" src="docs/contours.png" height="200" alt="Contours">
 
 With the cleaned up mask Joe Paint can locate objects by computing contours. Small contours can be filtered out by computing their area. Adjust the minimum area using the A and S keys.
 

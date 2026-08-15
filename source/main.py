@@ -296,6 +296,16 @@ def saveMasks():
     saveMask( purpleMasks[ index ], maskDirectory + "/" + name + "_purple.png" )
     saveMask( yellowMasks[ index ], maskDirectory + "/" + name + "_yellow.png" )
 # ===========================================================
+def computeMinThresholds( statistics ):
+    return np.array( [ round( statistics.hueStatistics.minThreshold( 0 ) ),
+                       round( statistics.saturationStatistics.minThreshold( 1 ) ),
+                       round( statistics.valueStatistics.minThreshold( 2 ) ) ] )
+# ===========================================================
+def computeMaxThresholds( statistics ):
+    return np.array( [ round( statistics.hueStatistics.maxThreshold( 0 ) ),
+                       round( statistics.saturationStatistics.maxThreshold( 1 ) ),
+                       round( statistics.valueStatistics.maxThreshold( 2 ) ) ] )
+# ===========================================================
 def saveMask( mask, filename ):
     if np.sum( mask ) == 0:
         path = Path( filename )
@@ -361,7 +371,7 @@ lastKeyPressed    = None
 lastMousePosition = None
 
 brushShape        = BrushShape.CIRCLE
-brushColor        = Color.GREEN
+brushColor        = Color.YELLOW
 brushSize         = 32
 mouseDown         = False
 
@@ -428,23 +438,23 @@ while True:
 
     #change brush color
     if keyPressed == ord( '1' ):
-        brushColor = Color.GREEN
+        brushColor = Color.YELLOW
         updateScreen()
 
     elif keyPressed == ord( '2' ):
-        brushColor = Color.PURPLE
-        updateScreen()
-
-    elif keyPressed == ord( '3' ):
         brushColor = Color.RED
         updateScreen()
 
-    elif keyPressed == ord( '4' ):
+    elif keyPressed == ord( '3' ):
         brushColor = Color.BLUE
         updateScreen()
 
+    elif keyPressed == ord( '4' ):
+        brushColor = Color.GREEN
+        updateScreen()
+
     elif keyPressed == ord( '5' ):
-        brushColor = Color.YELLOW
+        brushColor = Color.PURPLE
         updateScreen()
 
     elif keyPressed == ord( '6' ):
@@ -467,6 +477,26 @@ while True:
 
     #Escape or Q exits Joe Paint!!!
     if keyPressed == 27 or keyPressed == ord( 'q' ):
+        if blueStatistics.hueStatistics.average is not None:
+            calibration.minBlue = computeMinThresholds( blueStatistics )
+            calibration.maxBlue = computeMaxThresholds( blueStatistics )
+
+        if redStatistics.hueStatistics.average is not None:
+            calibration.minRed = computeMinThresholds(redStatistics)
+            calibration.maxRed = computeMaxThresholds(redStatistics)
+
+        if greenStatistics.hueStatistics.average is not None:
+            calibration.minGreen = computeMinThresholds(greenStatistics)
+            calibration.maxGreen = computeMaxThresholds(greenStatistics)
+
+        if purpleStatistics.hueStatistics.average is not None:
+            calibration.minPurple = computeMinThresholds(purpleStatistics)
+            calibration.maxPurple = computeMaxThresholds(purpleStatistics)
+
+        if yellowStatistics.hueStatistics.average is not None:
+            calibration.minYellow = computeMinThresholds(yellowStatistics)
+            calibration.maxYellow = computeMaxThresholds(yellowStatistics)
+
         saveCalibration( calibration )
         saveMasks()
         break

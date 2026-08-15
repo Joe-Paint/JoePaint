@@ -1,4 +1,5 @@
 import json
+import numpy as np
 from pathlib import Path
 
 #===========================================================
@@ -7,12 +8,33 @@ class Calibration:
         self.noiseRemovalSteps = 0
         self.fillHolesSteps    = 0
         self.minArea           = 0
+        self.minBlue   = np.array( [ 0, 0, 0 ] )
+        self.maxBlue   = np.array( [ 0, 0, 0 ] )
+        self.minRed    = np.array( [ 0, 0, 0 ] )
+        self.maxRed    = np.array( [ 0, 0, 0 ] )
+        self.minGreen  = np.array( [ 0, 0, 0 ] )
+        self.maxGreen  = np.array( [ 0, 0, 0 ] )
+        self.minPurple = np.array( [ 0, 0, 0 ] )
+        self.maxPurple = np.array( [ 0, 0, 0 ] )
+        self.minYellow = np.array( [ 0, 0, 0 ] )
+        self.maxYellow = np.array( [ 0, 0, 0 ] )
+
 # ===========================================================
 def saveCalibration( calibration : Calibration ):
     data = {
         "noiseRemovalSteps": calibration.noiseRemovalSteps,
         "fillHolesSteps": calibration.fillHolesSteps,
-        "minArea": calibration.minArea
+        "minArea": calibration.minArea,
+        "minBlue": calibration.minBlue.tolist(),
+        "maxBlue": calibration.maxBlue.tolist(),
+        "minRed": calibration.minRed.tolist(),
+        "maxRed": calibration.maxRed.tolist(),
+        "minGreen": calibration.minGreen.tolist(),
+        "maxGreen": calibration.maxGreen.tolist(),
+        "minPurple": calibration.minPurple.tolist(),
+        "maxPurple": calibration.maxPurple.tolist(),
+        "minYellow": calibration.minYellow.tolist(),
+        "maxYellow": calibration.maxYellow.tolist()
     }
 
     with open("calibration.json", "w") as file:

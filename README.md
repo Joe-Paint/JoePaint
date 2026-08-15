@@ -42,4 +42,4 @@ With the cleaned up mask Joe Paint can locate objects by computing contours. Sma
 
 Tap R at any time to clear all painted pixels and reset the number of steps for removing noise, filling holes, and the minimum contour area.
 
-Tap Q or Escape to quit and write out the calibration settings to a _knobs.json_ file.
+Tap Q or Escape to quit and write out the calibration settings to a _calibration.json_ file.

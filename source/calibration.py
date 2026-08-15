@@ -2,42 +2,41 @@ import json
 from pathlib import Path
 
 #===========================================================
-class Knobs:
+class Calibration:
     def __init__(self):
         self.noiseRemovalSteps = 0
         self.fillHolesSteps    = 0
         self.minArea           = 0
 # ===========================================================
-def saveKnobs( knobs : Knobs ):
+def saveCalibration( calibration : Calibration ):
     data = {
-        "noiseRemovalSteps": knobs.noiseRemovalSteps,
-        "fillHolesSteps": knobs.fillHolesSteps,
-        "minArea": knobs.minArea
+        "noiseRemovalSteps": calibration.noiseRemovalSteps,
+        "fillHolesSteps": calibration.fillHolesSteps,
+        "minArea": calibration.minArea
     }
 
-    with open("knobs.json", "w") as file:
+    with open("calibration.json", "w") as file:
         json.dump( data, file, indent = 4 )
 
 # ===========================================================
-def loadKnobs() -> Knobs:
-    knobs = Knobs()
-
-    filename = "knobs.json"
+def loadCalibration() -> Calibration:
+    calibration = Calibration()
+    filename = "calibration.json"
     path = Path( filename )
     if not path.is_file():
-        return knobs
+        return calibration
 
     with open(filename, "r") as file:
         data = json.load( file )
 
         if "noiseRemovalSteps" in data:
-            knobs.noiseRemovalSteps = data[ "noiseRemovalSteps"]
+            calibration.noiseRemovalSteps = data[ "noiseRemovalSteps"]
 
         if "fillHolesSteps" in data:
-            knobs.fillHolesSteps = data[ "fillHolesSteps"]
+            calibration.fillHolesSteps = data[ "fillHolesSteps"]
 
         if "minArea" in data:
-            knobs.minArea = data[ "minArea"]
+            calibration.minArea = data[ "minArea"]
 
-    return knobs
+    return calibration
 # ===========================================================

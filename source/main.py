@@ -9,7 +9,7 @@ from coordiante import *
 from histogram import *
 from mask import *
 from statistics import *
-from knobs import *
+from calibration import *
 
 #===========================================================
 def getMask():
@@ -154,23 +154,23 @@ def updateScreen():
     #show image side by side with mask for current color
     row1 = np.hstack( [ image, sampledPixels, histogramImage ] )
 
-    computedMask       = drawMask( hsvImage, currentStatistics(), knobs )
+    computedMask       = drawMask( hsvImage, currentStatistics(), calibration )
     tintedComputedMask = tintMask( computedMask, currentColor )
 
     if brushColor != Color.ERASE:
         drawText( tintedComputedMask, "Computed " + colorName(brushColor) + " Mask", Alignment.CENTER, 0)
-        drawText( tintedComputedMask, "Noise Removal: " + str( knobs.noiseRemovalSteps ), Alignment.LEFT, desiredHeight - 70 )
+        drawText( tintedComputedMask, "Noise Removal: " + str( calibration.noiseRemovalSteps ), Alignment.LEFT, desiredHeight - 70 )
         drawText( tintedComputedMask, "N / M", Alignment.RIGHT, desiredHeight - 70)
 
-        drawText( tintedComputedMask, "Fill Holes: " + str( knobs.fillHolesSteps ), Alignment.LEFT, desiredHeight - 40 )
+        drawText( tintedComputedMask, "Fill Holes: " + str( calibration.fillHolesSteps ), Alignment.LEFT, desiredHeight - 40 )
         drawText( tintedComputedMask, "F / G", Alignment.RIGHT, desiredHeight - 40)
 
     _, row1Width, _ = row1.shape
     maskHeight, maskWidth, _ = tintedComputedMask.shape
 
-    contoursImage = drawContours( images[ currentImage ].copy(), computedMask, knobs.minArea )
+    contoursImage = drawContours( images[ currentImage ].copy(), computedMask, calibration.minArea )
     drawText(contoursImage, "Computed Contours", Alignment.CENTER, 0)
-    drawText(contoursImage, "Minimum Area: " + str(knobs.minArea), Alignment.LEFT, desiredHeight - 40)
+    drawText(contoursImage, "Minimum Area: " + str(calibration.minArea), Alignment.LEFT, desiredHeight - 40)
     drawText(contoursImage, "A / S", Alignment.RIGHT, desiredHeight - 40)
 
     _, contoursWidth, _ = contoursImage.shape
@@ -365,7 +365,7 @@ brushColor        = Color.GREEN
 brushSize         = 32
 mouseDown         = False
 
-knobs = loadKnobs()
+calibration = loadCalibration()
 loadMasks()
 computeHistograms()
 computeStatistics()
@@ -394,34 +394,34 @@ while True:
         updateScreen()
 
     if keyPressed == ord( 'n' ):
-        knobs.noiseRemovalSteps+= 1
+        calibration.noiseRemovalSteps+= 1
         updateScreen()
 
-    if keyPressed == ord('m') and knobs.noiseRemovalSteps > 0:
-        knobs.noiseRemovalSteps-= 1
+    if keyPressed == ord('m') and calibration.noiseRemovalSteps > 0:
+        calibration.noiseRemovalSteps-= 1
         updateScreen()
 
     if keyPressed == ord( 'f' ):
-        knobs.fillHolesSteps+= 1
+        calibration.fillHolesSteps+= 1
         updateScreen()
 
-    if keyPressed == ord('g') and knobs.fillHolesSteps > 0:
-        knobs.fillHolesSteps-= 1
+    if keyPressed == ord('g') and calibration.fillHolesSteps > 0:
+        calibration.fillHolesSteps-= 1
         updateScreen()
 
     if keyPressed == ord( 'a' ):
-        knobs.minArea+= 10
+        calibration.minArea+= 10
         updateScreen()
 
-    if keyPressed == ord('s') and knobs.minArea > 0:
-        knobs.minArea-= 10
+    if keyPressed == ord('s') and calibration.minArea > 0:
+        calibration.minArea-= 10
         updateScreen()
 
     if keyPressed == ord('r') or keyPressed == 127:
         wipeAllMasks()
-        knobs.noiseRemovalSteps = 0
-        knobs.fillHolesSteps    = 0
-        knobs.minArea           = 0
+        calibration.noiseRemovalSteps = 0
+        calibration.fillHolesSteps    = 0
+        calibration.minArea           = 0
         computeHistograms()
         computeStatistics()
         updateScreen()
@@ -467,7 +467,7 @@ while True:
 
     #Escape or Q exits Joe Paint!!!
     if keyPressed == 27 or keyPressed == ord( 'q' ):
-        saveKnobs( knobs )
+        saveCalibration( calibration )
         saveMasks()
         break
 

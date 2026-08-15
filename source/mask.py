@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 # ===========================================================
-def drawMask( hueImage, statistics, knobs ):
+def drawMask( hueImage, statistics, calibration ):
     if statistics.hueStatistics.average == None:
         height, width, _ = hueImage.shape
 
@@ -34,12 +34,12 @@ def drawMask( hueImage, statistics, knobs ):
         maskGray = cv2.inRange(hueImage, darkColor, lightColor)
 
     # remove noise
-    maskGray = cv2.erode( maskGray,  None, iterations = knobs.noiseRemovalSteps )
-    maskGray = cv2.dilate( maskGray, None, iterations = knobs.noiseRemovalSteps )
+    maskGray = cv2.erode( maskGray,  None, iterations = calibration.noiseRemovalSteps )
+    maskGray = cv2.dilate( maskGray, None, iterations = calibration.noiseRemovalSteps )
 
     #Fill holes
-    maskGray = cv2.dilate(maskGray, None, iterations = knobs.fillHolesSteps )
-    maskGray = cv2.erode(maskGray, None, iterations = knobs.fillHolesSteps )
+    maskGray = cv2.dilate(maskGray, None, iterations = calibration.fillHolesSteps )
+    maskGray = cv2.erode(maskGray, None, iterations = calibration.fillHolesSteps )
 
     maskColor = cv2.cvtColor( maskGray, cv2.COLOR_GRAY2BGR )
 

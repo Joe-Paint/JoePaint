@@ -9,11 +9,24 @@ To use Joe Paint you will first need to take snapshots with your [Limelight](htt
 * Click the **Take Snapshot** button to save up to 32 snapshots on the camera
 * Download snapshots to Joe Paint's **snapshots** folder by changing the source type to **Snapshot** and clicking the capture download buttons.
 
-# Running Joe Paint
+# Installing
+
+Joe Paint is a Python 3 program that uses a number of Python packages (e.g. cv2, numpy and astropy). First
+install Python 3 and related packages by running the install script.
+
+## macOS
+run installPackages.cmd
+
+## Windows
+TODO
+
+# Running
 
 * run _JoePaint.cmd_ from the command line or
 * double click _JoePaint.command_ (macOS) or
 * configure your Python IDE (e.g. [PyCharm](https://www.jetbrains.com/pycharm/)) to run _source/main.py_ with the working directory set to the **JoePaint** folder.
+
+TODO - Windows
 
 <img align="right" src="docs/painting.png" width="300" alt="Captured Image">
 

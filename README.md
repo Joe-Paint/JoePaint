@@ -15,7 +15,11 @@ Joe Paint is a Python 3 program that uses a number of Python packages (e.g. cv2,
 install Python 3 and related packages by running the install script.
 
 ## macOS
-run installPackages.cmd
+First install python3 by running it from the command line. If it is not installed macOS will over to install the developer tools for you.
+/usr/bin/python3
+
+Next install required packages
+installPackages.cmd
 
 ## Windows
 TODO

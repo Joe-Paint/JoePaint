@@ -7,7 +7,9 @@ fi
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 cd $SCRIPT_DIR
 
-REQUIRED_PACKAGES=("numpy" "astropy")
+/usr/bin/python3 -m pip install --upgrade pip
+
+REQUIRED_PACKAGES=("opencv-python" "numpy" "astropy")
 
 for pkg in "${REQUIRED_PACKAGES[@]}"; do
     if ! /usr/bin/python3 -m pip show "$pkg" &> /dev/null; then

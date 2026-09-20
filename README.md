@@ -22,15 +22,20 @@ Next install required packages
 installPackages.cmd
 
 ## Windows
-TODO
+First install python3 from python.org.
+
+Next install required packages by starting cmd and then running the following commands:
+python3 -m pip install --upgrade pip
+python3 -m pip install opencv-python
+python3 -m pip install numpy
+python3 -m pip install astropy
 
 # Running
 
 * run _JoePaint.cmd_ from the command line or
 * double click _JoePaint.command_ (macOS) or
+* run python3 source/main.py or
 * configure your Python IDE (e.g. [PyCharm](https://www.jetbrains.com/pycharm/)) to run _source/main.py_ with the working directory set to the **JoePaint** folder.
-
-TODO - Windows
 
 <img align="right" src="docs/painting.png" width="300" alt="Captured Image">
 
